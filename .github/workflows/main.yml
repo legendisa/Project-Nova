@@ -2,13 +2,15 @@ name: Build-APK
 on: [push]
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ArtemSerebrennikov/buildozer-action@v1
+      - name: Build with Buildozer
+        uses: ArtemSerebrennikov/buildozer-action@v1
         with:
           workdir: .
-      - uses: actions/upload-artifact@v2
-         with:
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
           name: Nova-Uygulamasi
-          path: bin/*.apk 
+          path: bin/*.apk
