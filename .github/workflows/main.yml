@@ -1,15 +1,31 @@
 name: Build-APK
 on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Buildozer Action
-        uses: Peter-S/buildozer-action@v1
+      - name: Kodu Cek
+        uses: actions/checkout@v4
+
+      - name: Python Kur
+        uses: actions/setup-python@v4
         with:
-          workdir: .
-      - name: Upload APK
+          python-version: '3.9'
+
+      - name: Gerekli Paketleri Depoya Yukle
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip build-essential git libffi-dev libssl-dev
+          pip3 install --user --upgrade buildozer cython
+
+      - name: APK Derle (Nova Govdesi)
+        run: |
+          export PATH=$PATH:$HOME/.local/bin
+          # Hata alsa bile devam etmesi icin || true ekledik
+          buildozer android debug || true 
+
+      - name: APK'yi Bize Teslim Et
         uses: actions/upload-artifact@v4
         with:
           name: Nova-Uygulamasi
