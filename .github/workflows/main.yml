@@ -5,27 +5,33 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Kodu Cek
+      - name: Kodu Getir
         uses: actions/checkout@v4
+
+      - name: Java Kur (Android Icin Sart)
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
       - name: Python Kur
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
-      - name: Sistem Araclarini Yukle
+      - name: Buildozer Araclarini Yukle
         run: |
           sudo apt update
-          sudo apt install -y python3-pip build-essential git libffi-dev libssl-dev
-          pip3 install --user --upgrade buildozer cython
+          sudo apt install -y build-essential git python3-dev ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev zlib1g-dev libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good libffi-dev libssl-dev
+          pip install --user --upgrade buildozer cython virtualenv
 
-      - name: APK Derle (Nova Govdesi)
+      - name: APK'yi Insa Et
         run: |
           export PATH=$PATH:$HOME/.local/bin
           yes | buildozer android debug || true
 
-      - name: APK Dosyasini Hazirla
+      - name: APK'yi Bize Teslim Et
         uses: actions/upload-artifact@v4
         with:
-          name: Nova-Uygulamasi
+          name: Nova-Otonom-APK
           path: bin/*.apk
