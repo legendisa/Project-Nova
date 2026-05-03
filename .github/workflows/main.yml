@@ -12,3 +12,4 @@ jobs:
         with:
           name: Nova-Uygulamasi
           path: bin/*.apk
+
