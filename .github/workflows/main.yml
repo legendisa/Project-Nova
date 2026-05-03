@@ -9,9 +9,10 @@ jobs:
         with:
           workdir: .
       - uses: actions/upload-artifact@v2
-        with:
+         with:
           name: Nova-Uygulamasi
           path: bin/*.apk 
 
           
 
+ 
