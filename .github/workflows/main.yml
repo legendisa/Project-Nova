@@ -11,5 +11,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: Nova-Uygulamasi
-          path: bin/*.apk
+          path: bin/*.apk 
+
+          
 
