@@ -1,0 +1,5 @@
+      - name: APK Derle (Nova Govdesi)
+        run: |
+          export PATH=$PATH:$HOME/.local/bin
+          # Buildozer'ın her şeyi onaylaması için 'yes' komutunu ekliyoruz
+          yes | buildozer android debug
